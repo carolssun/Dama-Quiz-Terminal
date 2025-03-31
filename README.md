@@ -15,8 +15,25 @@ Dama Quiz é uma combinação de um jogo de damas comum com um jogo de quiz. Um 
 
 * <span style="color: orange">♠ </span>-> peça comum do jogador 1
 * ♠ -> peça comum do jogador 2
-* ♚-> peça dama do jogador 1
+* <h3> ♚ </h3> -> peça dama do jogador 1
 * ♚-> peça dama do jogador 2
 
 ## Movimentação: 
 Para escolher a peça que deseja mover, você deve informar a linha e a coluna de origem, respectivamente. Para escolher o local de destino, você deve informar a linha e a coluna de destino, respectivamente. A alternativa escolhida na pergunta do quiz, deve ser informada no terminal. Após 30 rodadas, caso ambos os jogadores concordem, o jogo pode ser declarado como empatado e finalizado.
+
+
+
+
+![Screenshot 2025-03-31 at 17 58 08](https://github.com/user-attachments/assets/6c985dc4-2778-4760-aa84-2d0c81bb76e9)
+
+
+
+![Screenshot 2025-03-31 at 18 00 28](https://github.com/user-attachments/assets/11ab0997-c704-46af-856d-4fd240a91937)
+
+
+
+
+![Screenshot 2025-03-31 at 18 00 58](https://github.com/user-attachments/assets/bfefc121-21aa-4247-aba6-d86e20e245f2)
+
+
+
