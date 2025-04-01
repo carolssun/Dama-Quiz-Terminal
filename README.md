@@ -23,17 +23,11 @@ Para escolher a peça que deseja mover, você deve informar a linha e a coluna d
 
 
 
-
-![Screenshot 2025-03-31 at 17 58 08](https://github.com/user-attachments/assets/6c985dc4-2778-4760-aa84-2d0c81bb76e9)
-
-
-
-![Screenshot 2025-03-31 at 18 00 28](https://github.com/user-attachments/assets/11ab0997-c704-46af-856d-4fd240a91937)
-
-
-
-
-![Screenshot 2025-03-31 at 18 00 58](https://github.com/user-attachments/assets/bfefc121-21aa-4247-aba6-d86e20e245f2)
-
-
+<br>
+<img width = "70%" src = "https://github.com/user-attachments/assets/6c985dc4-2778-4760-aa84-2d0c81bb76e9">
+<br>
+<img width = "70%" src = "https://github.com/user-attachments/assets/11ab0997-c704-46af-856d-4fd240a91937">
+<br>
+<img width = "70%" src = "https://github.com/user-attachments/assets/bfefc121-21aa-4247-aba6-d86e20e245f2">
+<br>
 
