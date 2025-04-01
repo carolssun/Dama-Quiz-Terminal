@@ -27,6 +27,6 @@ Para escolher a peça que deseja mover, você deve informar a linha e a coluna d
 <br>
 <img width = "70%" src = "https://github.com/user-attachments/assets/11ab0997-c704-46af-856d-4fd240a91937">
 <br>
-<img width = "70%" src = "https://github.com/user-attachments/assets/bfefc121-21aa-4247-aba6-d86e20e245f2">
+<img width = "70%" src = "https://github.com/user-attachments/assets/a0010d26-c7f6-489b-b6cf-52374701684a">
 <br>
 </div>
