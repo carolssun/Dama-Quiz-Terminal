@@ -2,7 +2,7 @@ import Foundation
 import Darwin
  
 
-
+// MARK: - ASCII ART
 var arteDamas:[[String]] = [
     ["***************************************************************************"],
     ["*                                                                          *"],
@@ -42,6 +42,7 @@ var arteFim:[[String]] = [
 ]
 
 
+// MARK: - Exibição de menu interativo com usuário
 class Menu {
     
     static func menuPrincipal() {
@@ -51,12 +52,9 @@ class Menu {
                 print(centralizarMatriz + arteDamas[i][j], terminator:"")
             }
         }
-        
-
-
+    
         let principalMenu:[String] = ["Escolha uma opção:","1- Jogar Damas","2- Regras do jogo","3- Sair"]
         centralizaStringJunto(palavra: "Escolha uma opção:", palavras: principalMenu)
-        
         
     }
     
@@ -74,26 +72,22 @@ class Menu {
     }
     
     
-    
+/* 
+ capta a opção do usuário e chama outras funções
+ */
     static func exibirMenuPrincipal() {
-        
         menuPrincipal()
         let continuar = true
         while continuar {
-            print(" ",terminator: centralizarX())
+            print(" ",terminator: centralizarX())//centraliza cursor no meio da tela
             if let opcao = readLine(), let opcaoInt = Int(opcao) {
                 switch opcaoInt {
                 case 1:
                     centralizaString(palavra: "Iniciando jogo de Damas...")
                     print()
-
                     jogo.iniciar()
-                    
-                    
                 case 2:
                     exibirMenuRegas()
-                    
-                    
                 case 3:
                     exibeFim()
                     break
@@ -120,7 +114,6 @@ class Menu {
     
     
     static func exibirMenuRegas(){
-        
         var continuar = true
         while continuar {
             menuRegras()
@@ -130,17 +123,14 @@ class Menu {
                 case 1:
                     print("\nRegra movimento de peças: \n")
                     RegrasMovimento()
-                    
                 case 2:
                     print("\nRegar de captura de peças inimigas: \n")
                     RegrasCaptura()
                 case 3:
                     exibirMenuPrincipal()
-                    
                 case 4:
                     exibeFim()
                     continuar = false
-                    
                 default:
                     print()
                     centralizaString(palavra: "Opção inválida. Tente novamente.")
