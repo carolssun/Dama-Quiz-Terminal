@@ -70,13 +70,13 @@ let perguntas: [Perguntas] = [
     
 ]
 
+//MARK: - Lógica Quiz
 class Pergunta {
-
-    
+    /* Compara alternativa escolhida pelo usuário com resposta correta*/
     static func verificarResposta(alt: Int, ind: Int) -> Bool {
         return alt == perguntas[ind].resposta
     }
-    
+    /* Exibir pergunta com índice atual*/
     static func exibirPergunta(ind: Int) {
         if ind == perguntas.count {
             print("Você acabou as perguntas")
@@ -86,9 +86,7 @@ class Pergunta {
             centralizaString(palavra: perguntas[ind].pergunta)
             
             var w = 0
-            
             (w, _) = tamanhoTerminal()
-            
             let tamPalavra = perguntas[ind].pergunta.count
             var espacosBranco = (w - tamPalavra) / 2
             
@@ -98,14 +96,13 @@ class Pergunta {
             
             let tab = String(repeating: " ", count: espacosBranco)
         
-            
+            /* Percorrer a lista de alternativas, retornar o índice (+1 pra ficar intuitivo p/usuàrio)
+             e o valor das alternativas */
             for (indice, alt) in perguntas[ind].alternativas.enumerated() {
                 print(tab, terminator: " ")
                 print("\(indice + 1)) \(alt) ")
 
             }
-            //percorrer a lista de alternativas, retornar o índice (+1 pra ficar intuitivo p/usuàrio)
-            // e o valor das alternativa
         }
     }
 }
