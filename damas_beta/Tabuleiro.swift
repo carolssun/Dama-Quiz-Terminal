@@ -262,7 +262,6 @@ class Tabuleiro {
             return false
         }
         
-        
         if matriz[linhaD][colunaD] == 0 {
             let deltaLinha = linhaD - linhaO
             let deltaColuna = colunaD - colunaO
@@ -412,12 +411,14 @@ class Tabuleiro {
         return nil
     }
     
-    /*chama a funcao das perguntas*/ 
+    /* Chama a função das perguntas */ 
     func iniciarQuiz(indice: Int) {
         var respostaValida = false
+        //Chama a pergunta do índice atual
         while !respostaValida {
             Pergunta.exibirPergunta(ind: indice)
             print(" ",terminator: centralizarX())
+            /* Se a resposta escolhida estiver correta, chama sortearPosicao e exibe tabuleiro atualizado */
             if let resposta = readLine(), !resposta.isEmpty {
                 if let respostaInt = Int(resposta),
                    Pergunta.verificarResposta(alt: respostaInt, ind: indice) {
@@ -432,7 +433,6 @@ class Tabuleiro {
                             print()
                             centralizaString(palavra: "Erro(Nao entrou no if let) consulte um dev do jogo")
                         }
-                        
                     }else{
                         if let posicao = sortearPosicao(para: 2){
                             let l = posicao.0
@@ -440,22 +440,17 @@ class Tabuleiro {
                             matriz[l][c] = 0
                             print()
                             centralizaString(palavra: "Peça na posição (\(l + 1), \(c + 1)) do jogador rival removida com sucesso")
-                            
-                            
                         }else{
                             print()
                             centralizaString(palavra: "Erro(Nao entrou no if let) consulte um dev do jogo")
                         }
                     }
                     print()
-                    centralizaString(palavra: "Resposta correta!")
-                    // explode a peca aleatoria do adversario
-                    
+                    centralizaString(palavra: "Resposta correta!")                  
                 } else {
                     print()
                     centralizaString(palavra: "Resposta incorreta!")
                 }
-                
                 respostaValida = true
             } else {
                 print()
@@ -463,5 +458,4 @@ class Tabuleiro {
             }
         }
     }
-    
 }
