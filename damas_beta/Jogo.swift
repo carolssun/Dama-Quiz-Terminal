@@ -21,7 +21,7 @@ class Jogo {
         
         // MARK: - Lógica do Jogo
         /* Game loop principal 
-            verifica contador de jogada e turno do jogador  para verificar 
+            verifica contador de jogada e turno do jogador para verificar se é um fluxo de quiz ou jogada normal
         */
         while !tabuleiro.fimDeJogo() {
             if contJogada%3==0 && turno==1 || contJogada%3==1 && turno==2{
@@ -53,7 +53,8 @@ class Jogo {
             }
             tabuleiro.exibir()
             contJogada += 1
-            if contJogada > 30{
+         
+            if contJogada > 30{ // condição de empate
                 if empataJogo(){
                     Menu.exibeFim()
                     break
@@ -64,7 +65,7 @@ class Jogo {
        
     }
     
-    // realiza a troca do turno ( utilizada em calculos de validacao posteriormente
+    /* realiza a troca do turno utilizada em calculos de validacao posteriormente */ 
     func alternarTurno(){
         turno = (turno == 1) ? 2 : 1
     }
@@ -76,7 +77,7 @@ class Jogo {
         return 2
     }
     
-    // TODO: - Entrada de Usuário
+    // MARK: - Entrada de Usuário
     func readInt() -> (Int, Int) {
         print(" ",terminator: centralizarX())
         if let entrada = readLine() {
@@ -84,10 +85,10 @@ class Jogo {
             if partes.count == 2,
                let valorLinha = Int(partes[0]),
                let valorColuna = Int(partes[1]) {
-                return (valorLinha, valorColuna)
+                return (valorLinha, valorColuna) // retorna tupla linha e coluna
             }
         }
-        return (-1, -1)
+        return (-1, -1) 
     }
     
     func selecionaPeca(matriz: [[Int]]) -> (Int, Int) {
@@ -114,7 +115,7 @@ class Jogo {
         }
         print()
         centralizaString(palavra: "Linha e coluna selecionadas com sucesso")
-        //print("\nLinha e coluna selecionadas com sucesso")
+     
         return (linha, coluna)
     }
     
@@ -127,7 +128,8 @@ class Jogo {
         (linha, coluna) = readInt()
         linha -= 1
         coluna -= 1
-        
+     
+        //garante que está dentro do tabuleiro
         while linha < 0 || linha >= 8 || coluna < 0 || coluna >= 8 {
             print()
             centralizaString(palavra: "Local selecionado inválido.")
@@ -160,7 +162,6 @@ class Jogo {
         }else{
             return false
         }
-        
     }
     
     
