@@ -23,7 +23,7 @@ class Tabuleiro {
     }
     
     
-    // exibe o tabuleiro de INT convertendo para uma string dependendo do INT
+    /* Exibe o tabuleiro de INT convertendo para uma string dependendo do INT */ 
     func exibir() {
         (largura, altura) = tamanhoTerminal()
         
@@ -36,7 +36,7 @@ class Tabuleiro {
         print("1 2 3 4 5 6 7 8\n")
         
         var contador = 1
-        var casa : Bool = true
+        var casa : Bool = true // utilizada para alternar as casas vazias
         for linha in matriz {
             casa = !casa
             print(espacos, terminator: "")
@@ -65,8 +65,9 @@ class Tabuleiro {
         }
         print()
     }
-    
-    //Funcao principal, utiliza todas as validacoes para realizar o movimento da peca selecionada
+
+    //MARK: - movimentação das peças
+    /* Funcao principal, utiliza todas as validacoes para realizar o movimento da peca selecionada */
     func movePeca() {
         comeu = false // Utilizado para verificar se o jogador pode realizar mais um movimento
         var (linhaO, colunaO) = jogo.selecionaPeca(matriz: matriz)
@@ -74,7 +75,7 @@ class Tabuleiro {
         
         var peca = matriz[linhaO][colunaO]
         
-        //Utilizado para verificar a variancia do movimento da peca pela matriz, classificando o movimento como valido ou nao
+        /* Utilizado para verificar a variancia do movimento da peca pela matriz, classificando o movimento como valido ou nao */
         var deltaLinha = linhaD - linhaO
         var deltaColuna = colunaD - colunaO
         
@@ -83,45 +84,37 @@ class Tabuleiro {
         
         let jogador = jogo.quemJoga()
         
-        //nao permite mover a peca do adversario
+        /* Não permite mover a peca do adversario */
         while jogo.quemJoga() == 1 && peca % 2 == 0{
             print()
             centralizaString(palavra: "Atenção jogador, voce pode apenas mover a sua peça")
-            
             (linhaO, colunaO) = jogo.selecionaPeca(matriz: matriz)
             (linhaD, colunaD) = jogo.selecionaJogada(matriz: matriz)
-            
             peca = matriz[linhaO][colunaO]
-            
         }
-        
         while jogo.quemJoga() == 2 && peca % 2 != 0{
             print()
             centralizaString(palavra: "Atenção jogador, voce pode apenas mover a sua peça")
             (linhaO, colunaO) = jogo.selecionaPeca(matriz: matriz)
             (linhaD, colunaD) = jogo.selecionaJogada(matriz: matriz)
-            
             peca = matriz[linhaO][colunaO]
-            
         }
         
         let ehDama = (peca == 3 || peca == 4)
         
-        //realiza as verificacoes para a dama
+        /* Realiza as verificacoes para a dama */
         if ehDama {
             if validaJogadaDama(linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD, jogador: jogo.quemJoga()) {
-                // com base no resultado da tupla, define se pode ou nao comer a peca adversaria
+                /* Com base no resultado da tupla, define se pode ou nao comer a peca adversaria */ 
                 if comePecaDama(linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD, jogador: jogo.quemJoga()) == (-1,-1){
                 }else{
                     if !comeu{
-                        
-                        
                         var l :Int = 0
                         var c :Int = 0
                         
                         (l,c) = comePecaDama(linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD, jogador: jogo.quemJoga())
                         matriz[l][c] = 0
-                        (linhaD, colunaD) = (l + passoLinha,c + passoColuna)
+                        (linhaD, colunaD) = (l + passoLinha,c + passoColuna) // impede a dama de se mover após comer uma peça
                         print()
                         centralizaString(palavra: "Dama movida para casa adjacente a peça inimiga")
                         matriz[linhaD][colunaD] = peca
@@ -135,7 +128,7 @@ class Tabuleiro {
             } else {
                 print()
                 centralizaString(palavra: "Jogada inválida para dama")
-                // caso o usuario digite uma posicao invalida, ele recebe mais uma chance de mover a peca
+                /* Caso o usuario digite uma posicao invalida, ele recebe mais uma chance de mover a peca */ 
                 if !validaJogadaDama(linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD, jogador: jogo.quemJoga()){
                     (linhaD, colunaD) = jogo.selecionaJogada(matriz: matriz)
                     deltaLinha = linhaD - linhaO
@@ -148,8 +141,6 @@ class Tabuleiro {
                         if comePecaDama(linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD, jogador: jogo.quemJoga()) == (-1,-1){
                         }else{
                             if !comeu{
-                                
-                                
                                 var l :Int = 0
                                 var c :Int = 0
                                 
@@ -165,21 +156,18 @@ class Tabuleiro {
                         }
                         matriz[linhaD][colunaD] = peca
                         matriz[linhaO][colunaO] = 0
-                    }
-                    
+                    } 
                 }
-                
             }
         } else {
-            // nao permite o peao andar da mesma forma que a dama
+            /* Não permite o peao andar da mesma forma que a dama */ 
             while (linhaO - linhaD) > 2{
                 centralizaString(palavra: "Jogada Invalida")
                 (linhaD, colunaD) = jogo.selecionaJogada(matriz: matriz)
                 deltaLinha = linhaD - linhaO
                 deltaColuna = colunaD - colunaO
                 
-                
-                //verifica se o peao come outra peca
+                /* Verifica se o peao come outra peca */
                 if comePeca(jogador: jogo.quemJoga(), linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD) {
                     if !comeu{
                         matriz[linhaD][colunaD] = peca
@@ -195,13 +183,12 @@ class Tabuleiro {
                     matriz[linhaO][colunaO] = 0
                 }
                 
-                // Verifica se vira dama
+                /*  Verifica se vira dama */
                 if jogador == 1 && linhaD == 7 && peca == 1 {
                     matriz[linhaD][colunaD] = 3 // Vira dama
                 } else if jogador == 2 && linhaD == 0 && peca == 2 {
                     matriz[linhaD][colunaD] = 4
                 }
-                
             }
             if validaJogada(jogador: jogo.quemJoga(), linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD) {
                 if comePeca(jogador: jogo.quemJoga(), linhaO: linhaO, colunaO: colunaO, linhaD: linhaD, colunaD: colunaD) {
@@ -219,7 +206,6 @@ class Tabuleiro {
                     matriz[linhaO][colunaO] = 0
                 }
                 
-                // Verifica se vira dama
                 if jogador == 1 && linhaD == 7 && peca == 1 {
                     matriz[linhaD][colunaD] = 3 // Vira dama
                 } else if jogador == 2 && linhaD == 0 && peca == 2 {
@@ -252,9 +238,8 @@ class Tabuleiro {
                         matriz[linhaO][colunaO] = 0
                     }
                     
-                    // Verifica se vira dama
                     if jogador == 1 && linhaD == 7 && peca == 1 {
-                        matriz[linhaD][colunaD] = 3 // Vira dama
+                        matriz[linhaD][colunaD] = 3
                     } else if jogador == 2 && linhaD == 0 && peca == 2 {
                         matriz[linhaD][colunaD] = 4
                     }
@@ -262,15 +247,13 @@ class Tabuleiro {
             }
         }
     }
-    
-    
-    // validacao basica para a peca
+
+    /* Validacao basica para a peca */
     func validaJogada(jogador: Int, linhaO: Int, colunaO: Int, linhaD: Int, colunaD: Int) -> Bool {
         let pecaDes :Int = matriz[linhaD][colunaD]
         
         if pecaDes != 0 {
             return false
-        
         }
         
         if matriz[linhaO][colunaO] == 2 && jogador == 1{
@@ -292,12 +275,10 @@ class Tabuleiro {
                 return true
             }
         }
-        
-        
         return false
     }
     
-    // regras diferenciadas para a dama ( pode se mover de forma diferente)
+    /* Regras diferenciadas para a dama ( pode se mover de forma diferente) */ 
     func validaJogadaDama(linhaO: Int, colunaO: Int, linhaD: Int, colunaD: Int, jogador: Int) -> Bool {
         let deltaLinha = linhaD - linhaO
         let deltaColuna = colunaD - colunaO
@@ -305,10 +286,10 @@ class Tabuleiro {
         if abs(deltaLinha) == abs(deltaColuna) {
             return true  // Movimento não é diagonal
         }
-        
+        /* Verifica direção do movimento da dama */ 
         let passoLinha = deltaLinha > 0 ? 1 : -1
         let passoColuna = deltaColuna > 0 ? 1 : -1
-        
+        /* Variáveis auxiliares que percorrem a diagonal */ 
         var l = linhaO + passoLinha
         var c = colunaO + passoColuna
         
@@ -321,7 +302,6 @@ class Tabuleiro {
                     }else{
                         return false
                     }
-                    
                 } else {
                     return false  // Peça do próprio jogador bloqueando o caminho
                 }
@@ -333,13 +313,11 @@ class Tabuleiro {
         if matriz[linhaD][colunaD] != 0 {
             return false  // Destino não está vazio
         }
-        
         return true  // Movimento válido
     }
     
-    // validacoao para verificar se a dama pode comer a peca inimiga
+    /* Validação para verificar se a dama pode comer a peca inimiga */ 
     func comePecaDama (linhaO: Int, colunaO: Int, linhaD: Int, colunaD: Int, jogador: Int) -> (Int, Int){
-        
         let deltaLinha = linhaD - linhaO
         let deltaColuna = colunaD - colunaO
         
@@ -349,21 +327,20 @@ class Tabuleiro {
         var l = linhaO + passoLinha
         var c = colunaO + passoColuna
         
-        // como é verdade, ele ja viu se tem peca no caminho sem ser seguidas
+        /* Como o movimento já é valido, ele já viu se tem peca no caminho sem ser seguidas */ 
         var peca = matriz[l][c]
         
         while l != linhaD{
             if peca != 0 {
-                return (l, c)
+                return (l, c) // Retorna a posição da peça inimiga
             }
             l += passoLinha
             c += passoColuna
             peca = matriz[l][c]
         }
-        
         return (-1, -1)
     }
-    
+    /* Função verifica se a peça normal pode comer */
     func comePeca(jogador: Int, linhaO: Int, colunaO: Int, linhaD: Int, colunaD: Int) -> Bool {
         let dentroDosLimites = { (linha: Int, coluna: Int) -> Bool in
             return linha >= 0 && linha < 8 && coluna >= 0 && coluna < 8
@@ -376,7 +353,7 @@ class Tabuleiro {
         let deltaLinha = linhaD - linhaO
         let deltaColuna = colunaD - colunaO
         
-        // Captura válida é pular 2 casas na diagonal
+        /* Captura válida, pular 2 casas na diagonal*/ 
         if abs(deltaLinha) == 2 && abs(deltaColuna) == 2 {
             let meioLinha = linhaO + deltaLinha / 2
             let meioColuna = colunaO + deltaColuna / 2
@@ -389,7 +366,7 @@ class Tabuleiro {
                     return false // Não pode capturar se destino estiver ocupado
                 }
                 
-                // Verifica se peça no meio é inimiga
+                /*  Verifica se peça no meio é inimiga */
                 if jogador == 1 && (pecaMeio == 2 || pecaMeio == 4) {
                     return true
                 }
@@ -402,7 +379,7 @@ class Tabuleiro {
         return false // Não é um movimento de captura válido
     }
     
-    // funcao que varre a matriz para verificar se ainda resta a peca de algum dos times
+    /* Função que varre a matriz para verificar se ainda resta a peca de algum dos times */ 
     func fimDeJogo() -> Bool {
         var jogador1TemPeca = false
         var jogador2TemPeca = false
@@ -413,14 +390,11 @@ class Tabuleiro {
                 if valor == 2 || valor == 4 { jogador2TemPeca = true }
             }
         }
-        
         return !(jogador1TemPeca && jogador2TemPeca)
     }
-    
-    
-    
-    // funcao que caso a resposta for correta, remove uma peca adversaria de forma aleatoria
-    func explodePeca() -> [Int: [(Int, Int)]]{
+    //MARK: - Fluxo de quiz
+    /* Função que caso a resposta for correta, remove uma peca adversaria de forma aleatoria */ 
+    func explodePeca() -> [Int: [(Int, Int)]]{ // dicionário de tuplas, onde a tupla representa a linha e coluna
         var posicoes: [Int: [(Int, Int)]] = [:]
         
         for (linha, row) in matriz.enumerated() {
@@ -430,16 +404,15 @@ class Tabuleiro {
         }
         return posicoes
     }
-    
+    /* seleciona item aleatório do dicionário */
     func sortearPosicao(para valor: Int) -> (Int, Int)? {
         if let lista = explodePeca()[valor], !lista.isEmpty {
             return lista.randomElement()
-            
         }
         return nil
     }
     
-    // chama a funcao das perguntas
+    /*chama a funcao das perguntas*/ 
     func iniciarQuiz(indice: Int) {
         var respostaValida = false
         while !respostaValida {
