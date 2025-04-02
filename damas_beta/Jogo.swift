@@ -1,5 +1,6 @@
 import Foundation
-
+ 
+// MARK : - construindo classe
 class Jogo {
     var tabuleiro: Tabuleiro
     var jogador1: Jogador
@@ -19,10 +20,12 @@ class Jogo {
     func iniciar() {
         
         // MARK: - Lógica do Jogo
-        /* */
+        /* Game loop principal 
+            verifica contador de jogada e turno do jogador  para verificar 
+        */
         while !tabuleiro.fimDeJogo() {
             if contJogada%3==0 && turno==1 || contJogada%3==1 && turno==2{
-                print() // Esta aijwdjawjdja
+                print()
                 centralizaString(palavra: "---------------------------------------------------------------------------")
                 print()
                 centralizaString(palavra:"Turno do jogador \(turno)")
